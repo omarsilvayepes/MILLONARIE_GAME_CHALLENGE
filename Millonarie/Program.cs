@@ -90,7 +90,9 @@ namespace Millonarie
             if (pregunta.Claves[randomNumber]==opcion){
                 jugador.addPuntos(jugador.Ronda);
                 jugador.pasarNivel();
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("!Respuesta Correcta¡,Puntos Acomulados: "+jugador.Puntaje);
+                Console.ResetColor();
                 if (jugador.Ronda==6){
                     jugador.Ronda = 5;
                     conexionBD.guardarJugador(jugador);
@@ -100,7 +102,9 @@ namespace Millonarie
             else{
                 juego = false;
                 jugador.Puntaje = 0;
+                Console.BackgroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("!Respuesta Incorrecta¡,Puntos Acomulados: " +0+" Juego Finalizado!");
+                Console.ResetColor();
                 conexionBD.guardarJugador(jugador);
             }
         }
