@@ -52,5 +52,13 @@ namespace Millonarie
         {
             this.puntaje+=5*ronda;
         }
+
+        public void crearNombre()
+        {
+            Console.WriteLine("Ingrese  Nombre: ");
+            string name = Console.ReadLine();
+            this.nombre= name.ToUpper();
+            Console.WriteLine("------------------------Bienvenido " +nombre+ " A Quien Quiere Ser Millonario------------------------");
+        }
     }
 }

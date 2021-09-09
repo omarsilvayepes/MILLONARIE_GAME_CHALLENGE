@@ -1,5 +1,7 @@
 ﻿using Millonarie.utils;
 using System;
+using System.Threading;
+
 namespace Millonarie
 {
     public class Program
@@ -9,22 +11,20 @@ namespace Millonarie
         public static Jugador jugador = new Jugador(null,"", 0, 1);
         public static Boolean juego = true;
         public static ConexionBD conexionBD = new ConexionBD();
+        public static Program program = new Program();
         public static void Main(string[] args)
         {
-            Console.WriteLine("Ingrese  Nombre: ");
-            string name = Console.ReadLine();
-            jugador.Nombre = name.ToUpper();
-            Console.WriteLine("------------------------Bienvenido " + jugador.Nombre + " A Quien Quiere Ser Millonario------------------------");
+            jugador.crearNombre();
             int i = 1;
             while (i<=5 && juego==true)
             {
                 Console.WriteLine("Ronda Numero : " + i+" -->> Puntos en Juego: "+i*5);
-                Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
-                seleccionarPregunta(i);
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+                program.seleccionarPregunta(i);
                 i++;
             }
         }
-        public static int seleccionarPregunta(int ronda)
+        public   int seleccionarPregunta(int ronda)
         {
             switch (ronda)
             {
@@ -72,7 +72,7 @@ namespace Millonarie
                     }
                 }
             }
-            Console.WriteLine("----------------------------------------------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
             Console.WriteLine(" ¿ Desea Retirarse del Juego ? ,presione la tecla -> s/S : ");
             string opcion = Console.ReadLine().ToLower();
             if (opcion.Equals("s")){
@@ -96,7 +96,7 @@ namespace Millonarie
                 if (jugador.Ronda==6){
                     jugador.Ronda = 5;
                     conexionBD.guardarJugador(jugador);
-                    Console.WriteLine("!!!Juego Finalizado¡!!,---------FELICIDADES,GANASTE EL PREMIO MAYOR----------");
+                    Console.WriteLine("!!!Juego Finalizado¡!!,---------FELICIDADES,GANASTE EL PREMIO MAYOR-----------------------------------");
                 }
             }
             else{
@@ -107,6 +107,8 @@ namespace Millonarie
                 Console.ResetColor();
                 conexionBD.guardarJugador(jugador);
             }
+            Thread.Sleep(5000);
+            Console.Clear();
         }
     }
 }
